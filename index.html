@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raghvendra Sahu — Full Stack Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════ NAV ═══
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <span class="nav-logo">rg.</span>
+      <div class="nav-links">
+        <a href="#projects">work</a>
+        <a href="#about">about</a>
+        <a href="#activity">activity</a>
+        <a href="#contact">contact</a>
+      </div>
+    </div>
+  </nav>
+ -->
+  <!-- ═══════════════════════════════════════════ HERO ═══ -->
+  <section class="hero" id="home">
+    <div class="hero-top-bar">
+      <div class="hero-clock" id="hero-clock">--:--:--:--</div>
+      <div class="hero-github-stars" id="hero-gh-stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        <span id="gh-stars-count">loading...</span>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-greeting">Hi, <span class="wave">👋</span></p>
+        <h1 class="hero-name">
+          I'm <span class="pfp-inline"><img src="https://avatars.githubusercontent.com/u/1?v=4" alt="pfp" id="hero-pfp" /></span> Raghvendra
+        </h1>
+        <h2 class="hero-role">founder &amp; builder <span class="accent">@</span><br/>Raigen Studios</h2>
+
+        <p class="hero-bio">
+          Full Stack web developer &amp; CP explorer. I love building products to solve real-world problems. Specialized in frontend development &amp; system design.
+        </p>
+
+        <div class="hero-socials">
+          <a href="https://x.com/raigenlabs" target="_blank" class="social-link" aria-label="Twitter">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.26 5.633zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>twitter</span>
+          </a>
+          <a href="https://www.linkedin.com/in/raghvendrasahu100" target="_blank" class="social-link" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <span>linkedin</span>
+          </a>
+          <a href="https://github.com/raigenlabs" target="_blank" class="social-link" aria-label="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            <span>github</span>
+          </a>
+          <a href="https://instagram.com/buildwithraghav1" target="_blank" class="social-link" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <span>instagram</span>
+          </a>
+          <a href="mailto:raigenlabs@gmail.com" class="social-link" aria-label="Email">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>email</span>
+          </a>
+        </div>
+
+        <div class="hero-cta">
+          <a href="/bnaya_nhi_abhi" class="btn-outline" target="_blank">Resume / CV</a>
+          <a href="#contact" class="btn-solid">get in touch</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Stack Slider -->
+    <div class="tech-slider-wrapper">
+      <div class="tech-slider" id="tech-slider">
+        <div class="tech-slide">React</div>
+        <div class="tech-slide">Javascript</div>
+        <div class="tech-slide">mySQL</div>
+        <div class="tech-slide">Git</div>
+        <div class="tech-slide">Github</div>
+        <div class="tech-slide">Bootstrap</div>
+        <div class="tech-slide">Tailwind CSS</div>
+        <div class="tech-slide">XML</div>
+        <div class="tech-slide">Python</div>
+        <div class="tech-slide">Figma</div>
+        <!-- Duplicate for seamless loop -->
+        <div class="tech-slide">React</div>
+        <div class="tech-slide">Javascript</div>
+        <div class="tech-slide">mySQL</div>
+        <div class="tech-slide">Git</div>
+        <div class="tech-slide">Github</div>
+        <div class="tech-slide">Bootstrap</div>
+        <div class="tech-slide">Tailwind CSS</div>
+        <div class="tech-slide">XML</div>
+        <div class="tech-slide">Python</div>
+        <div class="tech-slide">Figma</div>
+      </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="experience-section reveal">
+      <p class="section-label">experience</p>
+      <div class="experience-list">
+        <details class="exp-item">
+          <summary>
+            <span class="exp-company">Raigen Studios</span>
+            <span class="exp-role">founder</span>
+            <span class="exp-arrow">↓</span>
+          </summary>
+          <div class="exp-details">
+            <p>Founded and led a creative technology studio focused on building scalable web products and digital experiences. Managed cross-functional teams and drove product strategy.</p>
+            <span class="exp-date">2025 — present</span>
+          </div>
+        </details>
+        <details class="exp-item">
+          <summary>
+            <span class="exp-company">Pixartual</span>
+            <span class="exp-role">senior developer</span>
+            <span class="exp-arrow">↓</span>
+          </summary>
+          <div class="exp-details">
+            <p>Led frontend architecture and built high-performance React applications. Mentored junior developers and established coding standards across the team.</p>
+            <span class="exp-date">2023 — present</span>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ PROJECTS ═══ -->
+  <section class="section" id="projects">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <p class="section-label">selected work</p>
+        <div class="projects-toggle">
+          <button class="toggle-btn active" data-filter="main">main</button>
+          <span class="toggle-div">|</span>
+          <button class="toggle-btn" data-filter="fun">fun</button>
+        </div>
+      </div>
+
+      <div class="projects-grid" id="projects-grid">
+        <!-- Main Projects -->
+        <article class="project-card reveal" data-type="main">
+          <div class="project-preview">
+            <div class="project-preview-inner">
+              <div class="preview-placeholder">
+                <img src="DZNRDEV.png" alt="DZNRDEV preview" />
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title-row">
+              <h3 class="project-title">DZNRDEV</h3>
+              <div class="project-links">
+                <a href="https://github.com/raigenlabs/DZNRDEV" target="_blank" class="icon-btn" aria-label="GitHub">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </a>
+                <a href="https://dznrdev.ct.ws" target="_blank" class="icon-btn" aria-label="Live demo">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+            <p class="project-desc">A full-scale creative studio platform for managing clients, projects, and deliverables with real-time collaboration features.</p>
+            <div class="project-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">Tailwind css</span>
+              <span class="tag">Javascript</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-type="main">
+          <div class="project-preview">
+            <div class="project-preview-inner">
+              <div class="preview-placeholder accent-bg">
+                <img src="customai.png" alt="custom AI" />
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title-row">
+              <h3 class="project-title">Custom AI</h3>
+              <div class="project-links">
+                <a href="https://github.com/raigenlabs/CustomAI" target="_blank" class="icon-btn" aria-label="GitHub">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </a>
+                <a href="https://custom-ai-iota.vercel.app" target="_blank" class="icon-btn" aria-label="Live demo">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+            <p class="project-desc">An universal AI API Frontend - Connect to any AI model instantly without building your own frontend. Support for OpenAI, Anthropic, Gemini, HuggingFace, and 20+ more AI services.</p>
+            <div class="project-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">Tailwind CSS</span>
+              <span class="tag">Javascript</span>
+              <span class="tag">APIs</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-type="main">
+          <div class="project-preview">
+            <div class="project-preview-inner">
+              <div class="preview-placeholder fun-bg">
+                <img src="openqr1.png" alt="openQR preview" />
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title-row">
+              <h3 class="project-title">OpenQR</h3>
+              <div class="project-links">
+                <a href="https://github.com/raigenlabs/openQR" target="_blank" class="icon-btn" aria-label="GitHub">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </a>
+                <a href="https://raigenlabs.github.io/openQR" target="_blank" class="icon-btn" aria-label="Live demo">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+            <p class="project-desc">Ad-Free & Login-Free QR Code Generator. A fast, modern, and privacy-first QR code generator that runs entirely in your browser.</p>
+            <div class="project-tags">
+              <span class="tag">API</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-type="fun">
+          <div class="project-preview">
+            <div class="project-preview-inner">
+              <div class="preview-placeholder fun-bg2">
+                <img src="flowergarden.png" alt="flower garden">
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title-row">
+              <h3 class="project-title">Flower Garden</h3>
+              <div class="project-links">
+                <a href="https://github.com/raigenlabs/flower-garden" target="_blank" class="icon-btn" aria-label="GitHub">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </a>
+                <a href="https://herflowergarden.netlify.app" target="_blank" class="icon-btn" aria-label="Live demo">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+            <p class="project-desc">A Virtual 3D space Flower Garden created using three.js and jquery</p>
+            <div class="project-tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">CSS</span>
+              <span class="tag">three.js</span>
+              <span class="tag">jquery</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-type="fun">
+          <div class="project-preview">
+            <div class="project-preview-inner">
+              <div class="preview-placeholder fun-bg2">
+                <img src="valentine.png" alt="flower garden">
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title-row">
+              <h3 class="project-title">will you be my Valentine?</h3>
+              <div class="project-links">
+                <a href="https://github.com/raigenlabs/valentine" target="_blank" class="icon-btn" aria-label="GitHub">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </a>
+                <a href="https://raigenlabs.github.io/valentine" target="_blank" class="icon-btn" aria-label="Live demo">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+            <p class="project-desc">A Cute webpage to ask her be your valentine. checkout with username "HER".</p>
+            <div class="project-tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">CSS</span>
+              <span class="tag">HTML</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="show-all-wrapper reveal">
+        <button class="btn-outline-sm" id="show-all-btn">show all projects</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ ABOUT ═══ -->
+  <section class="section" id="about">
+    <div class="section-inner about-grid">
+      <div class="about-left reveal">
+        <p class="section-label">about me</p>
+        <div class="about-pfp-wrapper">
+          <img src="https://avatars.githubusercontent.com/u/1?v=4" alt="Raghvendra Sahu" class="about-pfp" id="about-pfp" />
+          <div class="pfp-ring"></div>
+        </div>
+        <h2 class="about-name">Raghvendra sahu</h2>
+        <p class="about-bio">
+          I'm a Full Stack web developer and CP explorer. I love building products to solve real-world problems. I'm specialized in frontend development with a strong foundation in system design and backend architecture.
+        </p>
+        <p class="about-bio">
+          When I'm not coding, I'm either competing in programming contests, mentoring aspiring developers, or experimenting with new tech stacks.
+        </p>
+
+        <!-- Spotify Widget -->
+        <div class="spotify-widget reveal" id="spotify-widget">
+          <div class="spotify-header">
+            <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+            </svg>
+            <span class="spotify-label" id="spotify-status">last played</span>
+            <div class="spotify-bars" id="spotify-bars">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="spotify-track" id="spotify-track">
+            <div class="spotify-album-art">
+              <img id="spotify-album-img" src="" alt="album" />
+              <div class="spotify-album-placeholder" id="spotify-album-placeholder">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+              </div>
+            </div>
+            <div class="spotify-info">
+              <p class="spotify-song" id="spotify-song-name">Loading...</p>
+              <p class="spotify-artist" id="spotify-artist-name">— artist</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: activity panel -->
+      <div class="about-right">
+        <!-- LeetCode -->
+        <div class="activity-card reveal" id="leetcode-card">
+          <div class="activity-card-header">
+            <span class="activity-card-label">leetcode</span>
+            <a href="https://leetcode.com/u/raghvendrasahu" target="_blank" class="activity-card-link">↗</a>
+          </div>
+          <div class="lc-stats">
+            <div class="lc-stat">
+              <span class="lc-stat-val" id="lc-total">—</span>
+              <span class="lc-stat-key">solved</span>
+            </div>
+            <div class="lc-stat">
+              <span class="lc-stat-val" id="lc-easy">—</span>
+              <span class="lc-stat-key">easy</span>
+            </div>
+            <div class="lc-stat">
+              <span class="lc-stat-val" id="lc-medium">—</span>
+              <span class="lc-stat-key">medium</span>
+            </div>
+            <div class="lc-stat">
+              <span class="lc-stat-val" id="lc-hard">—</span>
+              <span class="lc-stat-key">hard</span>
+            </div>
+          </div>
+          <div class="lc-rank-row">
+            <span class="lc-rank-label">ranking</span>
+            <span class="lc-rank-val" id="lc-rank">—</span>
+          </div>
+          <!-- Submission sparkline placeholder -->
+          <div class="lc-graph-placeholder" id="lc-graph">
+            <canvas id="lc-canvas" width="300" height="60"></canvas>
+          </div>
+        </div>
+
+        <!-- GitHub Contribution -->
+        <div class="activity-card reveal" id="github-card">
+          <div class="activity-card-header">
+            <span class="activity-card-label">github</span>
+            <a href="https://github.com/raigenlabs" target="_blank" class="activity-card-link">↗</a>
+          </div>
+          <div class="gh-contribution-wrapper" id="gh-contribution-wrapper">
+            <div class="gh-loading" id="gh-loading">
+              <span class="mono-sm">fetching contributions...</span>
+            </div>
+            <canvas id="gh-canvas" style="display:none;"></canvas>
+            <div class="gh-total-label mono-sm" id="gh-total-label"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ GITHUB LOGS ═══ -->
+  <section class="section" id="activity">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <p class="section-label">github logs</p>
+        <a href="https://github.com/raigenlabs" target="_blank" class="section-link">view all ↗</a>
+      </div>
+      <div class="timeline" id="github-timeline">
+        <div class="timeline-loading mono-sm">fetching activity...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ CONTACT ═══ -->
+  <section class="section" id="contact">
+    <div class="section-inner contact-inner">
+      <div class="contact-left reveal">
+        <p class="section-label">contact</p>
+        <h2 class="contact-heading">let's build<br/><span class="accent">something.</span></h2>
+        <div class="contact-quote reveal">
+          <span class="quote-mark">"</span>
+          <p>destroy that which destroys you</p>
+        </div>
+      </div>
+      <div class="contact-right reveal">
+        <a href="https://cal.com" target="_blank" class="book-call-btn">
+          <span>book a call</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="mailto:raghvendra@example.com" class="contact-email">raigenlabs@gmail.com</a>
+
+        <!-- Visitor Counter -->
+        <div class="visitor-counter" id="visitor-counter">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span>you are the <span class="visitor-count mono-sm" id="visitor-num">—</span> visitor</span>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Designed &amp; Developed by <br><strong>Raghvendra Sahu<span class="accent">.</span></strong></p>
+      <p class="mono-sm">© 2026. All rights reserved.</p>
+    </footer>
+  </section>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
