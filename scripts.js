@@ -13,12 +13,12 @@ const CONFIG = {
 
   // ─── GitHub Contribution Graph config (from Config.tsx) ───
   ghContrib: {
-    apiUrl:      "https://github-contributions-api.deno.dev",
-    blockSize:   11,
+    apiUrl: "https://github-contributions-api.deno.dev",
+    blockSize: 11,
     blockMargin: 3,
-    fontSize:    11,
-    maxLevel:    4,
-    months:   ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+    fontSize: 11,
+    maxLevel: 4,
+    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     weekdays: ["", "M", "", "W", "", "F", ""],
     // Dark theme palette — identical to Config.tsx theme.dark
     colors: [
@@ -31,8 +31,8 @@ const CONFIG = {
   },
 
   // ─── Spotify ────────────────────────────────────────
-  spotifyApiUrl:  "/api/spotify",
-  spotifyEnabled: false,
+  // spotifyApiUrl:  "/api/spotify",
+  // spotifyEnabled: false,
 
   // ─── Visitor Counter ────────────────────────────────
 
@@ -94,7 +94,7 @@ function initNav() {
    PROJECT TOGGLE (main / fun)
 ══════════════════════════════════════════════════════ */
 function initProjectToggle() {
-  const btns  = document.querySelectorAll(".toggle-btn");
+  const btns = document.querySelectorAll(".toggle-btn");
   const cards = document.querySelectorAll(".project-card");
 
   btns.forEach(btn => {
@@ -108,7 +108,7 @@ function initProjectToggle() {
     });
   });
 
- const showAllBtn = document.getElementById("show-all-btn");
+  const showAllBtn = document.getElementById("show-all-btn");
   if (showAllBtn) {
     showAllBtn.addEventListener("click", () => {
       cards.forEach(c => c.classList.remove("hidden"));
@@ -129,11 +129,14 @@ async function loadGithubStars() {
   if (!el) return;
   try {
     const res = await fetch(
-      `https://api.github.com/users/${CONFIG.githubUsername}/repos?sort=stars&per_page=1`
+      `https://api.github.com/users/${CONFIG.githubUsername}/repos?sort=stars&per_page=100`
     );
     if (!res.ok) throw new Error();
     const repos = await res.json();
-    if (repos && repos[0]) el.textContent = repos[0].stargazers_count;
+    if (repos && repos.length > 0) {
+      const totalStars = repos.reduce((sum, r) => sum + r.stargazers_count, 0);
+      el.textContent = totalStars;
+    }
   } catch {
     el.textContent = "—";
   }
@@ -155,10 +158,10 @@ async function loadGithubStars() {
 
 // Mirrors contributionLevelMap in Github.tsx exactly
 const LEVEL_MAP = {
-  NONE:            0,
-  FIRST_QUARTILE:  1,
+  NONE: 0,
+  FIRST_QUARTILE: 1,
   SECOND_QUARTILE: 2,
-  THIRD_QUARTILE:  3,
+  THIRD_QUARTILE: 3,
   FOURTH_QUARTILE: 4,
 };
 
@@ -172,12 +175,12 @@ function buildFullYearData(validContribs) {
     (a, b) => new Date(a.date) - new Date(b.date)
   );
 
-  const today      = new Date();
+  const today = new Date();
   const oneYearAgo = new Date();
   oneYearAgo.setFullYear(today.getFullYear() - 1);
 
   const fullYear = [];
-  const cursor   = new Date(oneYearAgo);
+  const cursor = new Date(oneYearAgo);
 
   while (cursor <= today) {
     const dateStr = cursor.toISOString().split("T")[0];
@@ -195,27 +198,27 @@ function buildFullYearData(validContribs) {
  *          TOP_LABEL_H  px of month labels   | block rows
  */
 function drawContributionCalendar(canvas, days) {
-  const cfg  = CONFIG.ghContrib;
-  const BS   = cfg.blockSize;
-  const BM   = cfg.blockMargin;
+  const cfg = CONFIG.ghContrib;
+  const BS = cfg.blockSize;
+  const BM = cfg.blockMargin;
   const STEP = BS + BM;
   const ROWS = 7;
 
   const LEFT_LABEL_W = 22;
-  const TOP_LABEL_H  = 18;
+  const TOP_LABEL_H = 18;
 
   // Pad the start so the first day aligns to the correct weekday row
-  const firstDOW   = new Date(days[0].date).getDay(); // 0 = Sunday
-  const padded     = [...Array(firstDOW).fill(null), ...days];
-  const COLS       = Math.ceil(padded.length / ROWS);
+  const firstDOW = new Date(days[0].date).getDay(); // 0 = Sunday
+  const padded = [...Array(firstDOW).fill(null), ...days];
+  const COLS = Math.ceil(padded.length / ROWS);
 
   const W = LEFT_LABEL_W + COLS * STEP - BM;
-  const H = TOP_LABEL_H  + ROWS * STEP - BM;
+  const H = TOP_LABEL_H + ROWS * STEP - BM;
 
   const DPR = window.devicePixelRatio || 1;
-  canvas.width        = W * DPR;
-  canvas.height       = H * DPR;
-  canvas.style.width  = W + "px";
+  canvas.width = W * DPR;
+  canvas.height = H * DPR;
+  canvas.style.width = W + "px";
   canvas.style.height = H + "px";
   canvas.style.display = "block";
 
@@ -224,8 +227,8 @@ function drawContributionCalendar(canvas, days) {
   ctx.clearRect(0, 0, W, H);
 
   // ── Month labels (top row) ────────────────────────────
-  ctx.font         = `${cfg.fontSize}px 'JetBrains Mono', monospace`;
-  ctx.fillStyle    = "rgba(240,237,232,0.3)";
+  ctx.font = `${cfg.fontSize}px 'JetBrains Mono', monospace`;
+  ctx.fillStyle = "rgba(240,237,232,0.3)";
   ctx.textBaseline = "top";
 
   let lastMonth = -1;
@@ -250,8 +253,8 @@ function drawContributionCalendar(canvas, days) {
   padded.forEach((day, i) => {
     const col = Math.floor(i / ROWS);
     const row = i % ROWS;
-    const x   = LEFT_LABEL_W + col * STEP;
-    const y   = TOP_LABEL_H  + row * STEP;
+    const x = LEFT_LABEL_W + col * STEP;
+    const y = TOP_LABEL_H + row * STEP;
     ctx.fillStyle = day ? cfg.colors[day.level] : cfg.colors[0];
     ctx.beginPath();
     ctx.roundRect(x, y, BS, BS, 2);
@@ -259,9 +262,9 @@ function drawContributionCalendar(canvas, days) {
   });
 
   // Store layout data for tooltip
-  canvas._days     = days;
+  canvas._days = days;
   canvas._firstDOW = firstDOW;
-  canvas._layout   = { LEFT_LABEL_W, TOP_LABEL_H, STEP, BS, ROWS };
+  canvas._layout = { LEFT_LABEL_W, TOP_LABEL_H, STEP, BS, ROWS };
 }
 
 /** Hover tooltip — shows "N contributions on Day, Month Date" */
@@ -284,41 +287,41 @@ function attachContribTooltip(canvas) {
   `;
   document.body.appendChild(tip);
 
-  const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  const DAYS   = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   canvas.addEventListener("mousemove", (e) => {
     if (!canvas._days || !canvas._layout) return;
     const rect = canvas.getBoundingClientRect();
-    const scaleX = parseFloat(canvas.style.width)  / rect.width;
-    const mx = (e.clientX - rect.left)  * scaleX;
-    const my = (e.clientY - rect.top)   * scaleX;
+    const scaleX = parseFloat(canvas.style.width) / rect.width;
+    const mx = (e.clientX - rect.left) * scaleX;
+    const my = (e.clientY - rect.top) * scaleX;
 
     const { LEFT_LABEL_W, TOP_LABEL_H, STEP, BS, ROWS } = canvas._layout;
     const col = Math.floor((mx - LEFT_LABEL_W) / STEP);
-    const row = Math.floor((my - TOP_LABEL_H)  / STEP);
+    const row = Math.floor((my - TOP_LABEL_H) / STEP);
 
     if (col < 0 || row < 0 || row >= ROWS) { tip.style.opacity = "0"; return; }
 
     // Confirm cursor is inside a block (not in gap)
     const bx = LEFT_LABEL_W + col * STEP;
-    const by = TOP_LABEL_H  + row * STEP;
+    const by = TOP_LABEL_H + row * STEP;
     if (mx < bx || mx > bx + BS || my < by || my > by + BS) {
       tip.style.opacity = "0"; return;
     }
 
     const paddedIdx = col * ROWS + row;
-    const realIdx   = paddedIdx - canvas._firstDOW;
+    const realIdx = paddedIdx - canvas._firstDOW;
     if (realIdx < 0 || realIdx >= canvas._days.length) { tip.style.opacity = "0"; return; }
 
     const day = canvas._days[realIdx];
-    const d   = new Date(day.date + "T12:00:00");
+    const d = new Date(day.date + "T12:00:00");
     tip.textContent = day.count === 0
       ? `No contributions on ${DAYS[d.getDay()]}, ${MONTHS[d.getMonth()]} ${d.getDate()}`
       : `${day.count} contribution${day.count !== 1 ? "s" : ""} on ${DAYS[d.getDay()]}, ${MONTHS[d.getMonth()]} ${d.getDate()}`;
 
-    tip.style.left    = (e.clientX + 12) + "px";
-    tip.style.top     = (e.clientY - 30) + "px";
+    tip.style.left = (e.clientX + 12) + "px";
+    tip.style.top = (e.clientY - 30) + "px";
     tip.style.opacity = "1";
   });
 
@@ -326,11 +329,11 @@ function attachContribTooltip(canvas) {
 }
 
 async function loadGithubContributions() {
-  const wrapper    = document.getElementById("gh-contribution-wrapper");
-  const loadingEl  = document.getElementById("gh-loading");
-  const canvas     = document.getElementById("gh-canvas");
+  const wrapper = document.getElementById("gh-contribution-wrapper");
+  const loadingEl = document.getElementById("gh-loading");
+  const canvas = document.getElementById("gh-canvas");
   const totalLabel = document.getElementById("gh-total-label");
-  const cfg        = CONFIG.ghContrib;
+  const cfg = CONFIG.ghContrib;
 
   if (!canvas || !wrapper) return;
 
@@ -370,14 +373,14 @@ async function loadGithubContributions() {
         "contributionCount" in item
       )
       .map(item => ({
-        date:  item.date,
+        date: item.date,
         count: item.contributionCount || 0,
         level: LEVEL_MAP[item.contributionLevel] ?? 0,
       }));
 
     if (valid.length === 0) throw new Error("No valid contribution data returned");
 
-    const total    = valid.reduce((sum, c) => sum + c.count, 0);
+    const total = valid.reduce((sum, c) => sum + c.count, 0);
     const fullYear = buildFullYearData(valid);  // exact same logic as Github.tsx
 
     // Render
@@ -446,14 +449,14 @@ async function loadGithubContributions() {
        can take up to 60 seconds. Subsequent calls are instant.
 ══════════════════════════════════════════════════════ */
 async function loadLeetcodeStats() {
-  const totalEl  = document.getElementById("lc-total");
-  const easyEl   = document.getElementById("lc-easy");
+  const totalEl = document.getElementById("lc-total");
+  const easyEl = document.getElementById("lc-easy");
   const mediumEl = document.getElementById("lc-medium");
-  const hardEl   = document.getElementById("lc-hard");
-  const rankEl   = document.getElementById("lc-rank");
-  const canvas   = document.getElementById("lc-canvas");
-  const BASE     = "https://alfa-leetcode-api.onrender.com";
-  const user     = CONFIG.leetcodeUsername;
+  const hardEl = document.getElementById("lc-hard");
+  const rankEl = document.getElementById("lc-rank");
+  const canvas = document.getElementById("lc-canvas");
+  const BASE = "https://alfa-leetcode-api.onrender.com";
+  const user = CONFIG.leetcodeUsername;
 
   try {
     // Fire both requests in parallel
@@ -462,17 +465,17 @@ async function loadLeetcodeStats() {
       fetch(`${BASE}/${user}`),
     ]);
 
-    if (!solvedRes.ok)  throw new Error(`solved ${solvedRes.status}`);
+    if (!solvedRes.ok) throw new Error(`solved ${solvedRes.status}`);
     if (!profileRes.ok) throw new Error(`profile ${profileRes.status}`);
 
-    const solved  = await solvedRes.json();
+    const solved = await solvedRes.json();
     const profile = await profileRes.json();
 
-    if (totalEl)  totalEl.textContent  = solved.solvedProblem  ?? "—";
-    if (easyEl)   easyEl.textContent   = solved.easySolved     ?? "—";
-    if (mediumEl) mediumEl.textContent = solved.mediumSolved   ?? "—";
-    if (hardEl)   hardEl.textContent   = solved.hardSolved     ?? "—";
-    if (rankEl)   rankEl.textContent   = profile.ranking
+    if (totalEl) totalEl.textContent = solved.solvedProblem ?? "—";
+    if (easyEl) easyEl.textContent = solved.easySolved ?? "—";
+    if (mediumEl) mediumEl.textContent = solved.mediumSolved ?? "—";
+    if (hardEl) hardEl.textContent = solved.hardSolved ?? "—";
+    if (rankEl) rankEl.textContent = profile.ranking
       ? `#${Number(profile.ranking).toLocaleString()}`
       : "—";
 
@@ -494,9 +497,9 @@ async function loadLeetcodeStats() {
 }
 
 function drawLcSparkline(canvas, calendarObj) {
-  const ctx   = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d");
   const WEEKS = 52;
-  const now   = Date.now() / 1000;
+  const now = Date.now() / 1000;
 
   const vals = [];
   for (let i = WEEKS - 1; i >= 0; i--) {
@@ -506,17 +509,17 @@ function drawLcSparkline(canvas, calendarObj) {
     vals.push(total);
   }
 
-  const DPR  = window.devicePixelRatio || 1;
-  const W    = canvas.parentElement?.offsetWidth || 300;
-  const H    = 56;
-  canvas.width        = W * DPR;
-  canvas.height       = H * DPR;
-  canvas.style.width  = W + "px";
+  const DPR = window.devicePixelRatio || 1;
+  const W = canvas.parentElement?.offsetWidth || 300;
+  const H = 56;
+  canvas.width = W * DPR;
+  canvas.height = H * DPR;
+  canvas.style.width = W + "px";
   canvas.style.height = H + "px";
   ctx.scale(DPR, DPR);
   ctx.clearRect(0, 0, W, H);
 
-  const max  = Math.max(...vals, 1);
+  const max = Math.max(...vals, 1);
   const barW = (W - (WEEKS - 1) * 2) / WEEKS;
 
   const hasData = vals.some(v => v > 0);
@@ -525,7 +528,7 @@ function drawLcSparkline(canvas, calendarObj) {
   canvas.style.display = "block";
 
   vals.forEach((v, i) => {
-    const barH  = Math.max(2, (v / max) * (H - 4));
+    const barH = Math.max(2, (v / max) * (H - 4));
     const alpha = 0.18 + (v / max) * 0.82;
     ctx.fillStyle = `rgba(255,59,59,${alpha.toFixed(2)})`;
     ctx.beginPath();
@@ -538,19 +541,19 @@ function drawLcSparkline(canvas, calendarObj) {
    GITHUB ACTIVITY LOGS
 ══════════════════════════════════════════════════════ */
 const EVENT_LABELS = {
-  PushEvent:         (e) => ({ icon: "⬆", text: `pushed to <a href="https://github.com/${e.repo.name}" target="_blank"><strong>${e.repo.name}</strong></a>` }),
-  CreateEvent:       (e) => ({ icon: "✦", text: `created ${e.payload.ref_type} <strong>${e.payload.ref || e.repo.name}</strong>` }),
-  PullRequestEvent:  (e) => ({ icon: "⇄", text: `${e.payload.action} pull request in <a href="https://github.com/${e.repo.name}" target="_blank"><strong>${e.repo.name}</strong></a>` }),
-  IssuesEvent:       (e) => ({ icon: "◎", text: `${e.payload.action} issue in <strong>${e.repo.name}</strong>` }),
-  WatchEvent:        (e) => ({ icon: "★", text: `starred <a href="https://github.com/${e.repo.name}" target="_blank"><strong>${e.repo.name}</strong></a>` }),
-  ForkEvent:         (e) => ({ icon: "⑂", text: `forked <strong>${e.repo.name}</strong>` }),
+  PushEvent: (e) => ({ icon: "⬆", text: `pushed to <a href="https://github.com/${e.repo.name}" target="_blank"><strong>${e.repo.name}</strong></a>` }),
+  CreateEvent: (e) => ({ icon: "✦", text: `created ${e.payload.ref_type} <strong>${e.payload.ref || e.repo.name}</strong>` }),
+  PullRequestEvent: (e) => ({ icon: "⇄", text: `${e.payload.action} pull request in <a href="https://github.com/${e.repo.name}" target="_blank"><strong>${e.repo.name}</strong></a>` }),
+  IssuesEvent: (e) => ({ icon: "◎", text: `${e.payload.action} issue in <strong>${e.repo.name}</strong>` }),
+  WatchEvent: (e) => ({ icon: "★", text: `starred <a href="https://github.com/${e.repo.name}" target="_blank"><strong>${e.repo.name}</strong></a>` }),
+  ForkEvent: (e) => ({ icon: "⑂", text: `forked <strong>${e.repo.name}</strong>` }),
   IssueCommentEvent: (e) => ({ icon: "◷", text: `commented on issue in <strong>${e.repo.name}</strong>` }),
 };
 
 function timeAgo(dateString) {
   const diff = Math.floor((Date.now() - new Date(dateString)) / 1000);
-  if (diff < 60)    return `${diff}s ago`;
-  if (diff < 3600)  return `${Math.floor(diff / 60)}m ago`;
+  if (diff < 60) return `${diff}s ago`;
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
   if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
   return `${Math.floor(diff / 86400)}d ago`;
 }
@@ -576,7 +579,7 @@ async function loadGithubActivity() {
 
     supported.slice(0, 10).forEach((event, idx) => {
       const label = EVENT_LABELS[event.type](event);
-      const item  = document.createElement("div");
+      const item = document.createElement("div");
       item.className = "timeline-item reveal";
       item.style.transitionDelay = `${idx * 50}ms`;
       item.innerHTML = `
@@ -613,70 +616,57 @@ async function loadGithubActivity() {
 /* ══════════════════════════════════════════════════════
    SPOTIFY — LAST PLAYED
 ══════════════════════════════════════════════════════ */
-async function loadSpotify() {
-  const songEl      = document.getElementById("spotify-song-name");
-  const artistEl    = document.getElementById("spotify-artist-name");
-  const imgEl       = document.getElementById("spotify-album-img");
-  const statusEl    = document.getElementById("spotify-status");
-  const barsEl      = document.getElementById("spotify-bars");
-  const placeholder = document.getElementById("spotify-album-placeholder");
+const audio = document.getElementById('music-player');
+const playIcon = document.getElementById('play-icon');
+const pauseIcon = document.getElementById('pause-icon');
+const statusLabel = document.getElementById('spotify-status');
+const bars = document.getElementById('spotify-bars');
 
-  if (!CONFIG.spotifyEnabled) {
-    if (songEl)   songEl.textContent   = "spotify not connected";
-    if (artistEl) artistEl.textContent = "— set up API to enable";
-    return;
+function toggleMusic() {
+  if (audio.paused) {
+    audio.play();
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'block';
+    statusLabel.textContent = 'now playing';
+    bars.style.visibility = 'visible';
+  } else {
+    audio.pause();
+    playIcon.style.display = 'block';
+    pauseIcon.style.display = 'none';
+    statusLabel.textContent = 'paused';
+    bars.style.visibility = 'hidden';
   }
-
-  try {
-    const res  = await fetch(CONFIG.spotifyApiUrl);
-    if (!res.ok) throw new Error();
-    const data = await res.json();
-    if (!data?.title) {
-      if (songEl)   songEl.textContent   = "nothing playing";
-      if (artistEl) artistEl.textContent = "— check back later";
-      return;
-    }
-    if (songEl)   songEl.textContent   = data.title;
-    if (artistEl) artistEl.textContent = `— ${data.artist}`;
-    if (statusEl) statusEl.textContent = data.isPlaying ? "now playing" : "last played";
-    if (data.isPlaying && barsEl) barsEl.classList.add("playing");
-    if (data.albumImageUrl && imgEl) {
-      imgEl.src    = data.albumImageUrl;
-      imgEl.onload = () => {
-        imgEl.classList.add("loaded");
-        if (placeholder) placeholder.style.display = "none";
-      };
-    }
-  } catch {
-    if (songEl)   songEl.textContent   = "couldn't load track";
-    if (artistEl) artistEl.textContent = "— try again later";
-  }
-
-  if (CONFIG.spotifyEnabled) setTimeout(loadSpotify, 30_000);
 }
 
+// Reset on song end
+audio.addEventListener('ended', () => {
+  playIcon.style.display = 'block';
+  pauseIcon.style.display = 'none';
+  statusLabel.textContent = 'last played';
+  bars.style.visibility = 'hidden';
+});
 /* ══════════════════════════════════════════════════════
    VISITOR COUNTER
 ══════════════════════════════════════════════════════ */
 (async () => {
-    const API_KEY   = 'pt_0d67976367815a819780051401d757';
-    const PRESS_URL = 'https://api.lyket.dev/v1/clap-buttons/visits/my-website/press';
+  const API_KEY = 'pt_0d67976367815a819780051401d757';
+  const PRESS_URL = 'https://api.lyket.dev/v1/clap-buttons/visits/my-website/press';
 
-    try {
-      const res      = await fetch(PRESS_URL, {
-        method: 'PUT',
-        headers: {
-          'Content-Type':  'application/json',
-          'Authorization': `Bearer ${API_KEY}`
-        }
-      });
-      const { data } = await res.json();
-      document.getElementById('visitor-num').textContent = 
-        data.attributes.total_claps.toLocaleString();
-    } catch (e) {
-      document.getElementById('visitor-num').textContent = '—';
-    }
-  })();
+  try {
+    const res = await fetch(PRESS_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`
+      }
+    });
+    const { data } = await res.json();
+    document.getElementById('visitor-num').textContent =
+      data.attributes.total_claps.toLocaleString();
+  } catch (e) {
+    document.getElementById('visitor-num').textContent = '—';
+  }
+})();
 /* ══════════════════════════════════════════════════════
    PROFILE PICTURE — GitHub avatar
 ══════════════════════════════════════════════════════ */
@@ -689,7 +679,7 @@ function syncProfilePics() {
    INIT
 ══════════════════════════════════════════════════════ */
 document.addEventListener("DOMContentLoaded", () => {
-    startClock();
+  startClock();
   initNav();
   initReveal();
   initProjectToggle();
@@ -700,6 +690,6 @@ document.addEventListener("DOMContentLoaded", () => {
   loadGithubActivity();
 
   setTimeout(loadLeetcodeStats, 200);
-  setTimeout(loadSpotify,       400);
-  setTimeout(loadVisitorCount,  600);
+  setTimeout(loadSpotify, 400);
+  setTimeout(loadVisitorCount, 600);
 });
