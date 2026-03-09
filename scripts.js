@@ -627,7 +627,7 @@ function toggleMusic() {
     audio.play();
     playIcon.style.display = 'none';
     pauseIcon.style.display = 'block';
-    statusLabel.textContent = 'now playing';
+    statusLabel.textContent = 'Last Played';
     bars.style.visibility = 'visible';
   } else {
     audio.pause();
